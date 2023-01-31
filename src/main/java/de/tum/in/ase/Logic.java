@@ -21,8 +21,19 @@ public class Logic {
 
         Pattern p0 = Pattern.compile("^-?(0|[1-9]\\d*)([\\+x÷%-])(0|[1-9]\\d*)$");
 
-        Matcher m = p0.matcher(input);
+        try {
+            Matcher m = p0.matcher(input);
+        } catch (IllegalStateException e) {
+            //you caught exception so what?
+            String s1 = (e.getMessage());
+            String s2 = String.valueOf((p0.matcher(input)));
+            String s3 = ("yavaş feridun abi yine mi?");
+            String Combined = s1 + s2 + s3;
+            throw new IllegalStateException(Combined);
+        }
 
+        //Matcher m = p0.matcher(input);
+        /*
         String fnum0 = m.group(1);
         String snum0 = m.group(3);
 
@@ -33,7 +44,6 @@ public class Logic {
 
         try {
             Objects.equals(m.group(2), "+");
-            result = div(fnum, snum);
         } catch (IllegalStateException e) {
             //you caught exception so what?
             String s1 = (e.getMessage());
@@ -68,6 +78,12 @@ public class Logic {
         String sResult = String.valueOf(result);
 
         // TODO Task 1.1 - 1.5: Implement input handling and output calculation.
+        history.add("Result: " + sResult + System.lineSeparator());
+        return sResult;
+
+         */
+        String sResult = String.valueOf(input);
+
         history.add("Result: " + sResult + System.lineSeparator());
         return sResult;
     }
