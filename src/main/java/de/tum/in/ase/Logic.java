@@ -19,58 +19,37 @@ public class Logic {
         }
         history.add("Input: " + input + System.lineSeparator());
 
-        Pattern p0 = Pattern.compile("^-?(0|[1-9]\\d*)([\\+x÷%-])(0|[1-9]\\d*)$");
+        Pattern pirasa = Pattern.compile("^-?(0|[1-9]\\d*)([\\+x÷%-])(0|[1-9]\\d*)$");
 
-        try {
-            Matcher m = p0.matcher(input);
-        } catch (IllegalStateException e) {
-            //you caught exception so what?
-            String s1 = (e.getMessage());
-            String s2 = String.valueOf((p0.matcher(input)));
-            String s3 = ("yavaş feridun abi yine mi?");
-            String Combined = s1 + s2 + s3;
-            throw new IllegalStateException(Combined);
-        }
+        Matcher m = INPUT_VALIDATION_PATTERN.matcher(input);
+        m.matches();
+        m.groupCount();
 
-        //Matcher m = p0.matcher(input);
-        /*
-        String fnum0 = m.group(1);
-        String snum0 = m.group(3);
+        String fnum_init = m.group(1);
+        String snum_init = m.group(3);
 
-        long fnum = Long.parseLong(fnum0);
-        long snum = Long.parseLong(snum0);
+        String controlString = m.group(2);
 
-        long result = Long.parseLong(input);
+        long fn = Long.parseLong(fnum_init);
+        long sn = Long.parseLong(snum_init);
 
-        try {
-            Objects.equals(m.group(2), "+");
-        } catch (IllegalStateException e) {
-            //you caught exception so what?
-            String s1 = (e.getMessage());
-            String s2 = (m.group(2));
-            String s3 = ("yavaş feridun abi yine mi?");
-            String Combined = s1 + s2 + s3;
-            throw new IllegalStateException(Combined);
-        }
-
-        if (Objects.equals(m.group(2), "+")) {
-            result = sum(fnum, snum);
-        } else if (Objects.equals(m.group(2), "-")) {
-            result = sub(fnum, snum);
-        } else if (Objects.equals(m.group(2), "x")) {
-            result = mul(fnum, snum);
-        } else if (Objects.equals(m.group(2), "÷")) {
+        long result = fn;
+        if (Objects.equals(controlString, "+")) {
+            result = sum(fn, sn);
+        } else if (Objects.equals(controlString, "-")) {
+            result = sub(fn, sn);
+        } else if (Objects.equals(controlString, "x")) {
+            result = mul(fn, sn);
+        } else if (Objects.equals(controlString, "÷")) {
             try {
-                result = div(fnum, snum);
+                result = div(fn, sn);
             } catch (ArithmeticException e) {
-                //you caught exception so what?
                 System.out.println(e.getMessage());
             }
         } else if (Objects.equals(m.group(2), "%")) {
             try {
-                result = modulo(fnum, snum);
+                result = modulo(fn, sn);
             } catch (ArithmeticException e) {
-                //you caught exception so what?
                 System.out.println(e.getMessage());
             }
         }
@@ -78,12 +57,6 @@ public class Logic {
         String sResult = String.valueOf(result);
 
         // TODO Task 1.1 - 1.5: Implement input handling and output calculation.
-        history.add("Result: " + sResult + System.lineSeparator());
-        return sResult;
-
-         */
-        String sResult = String.valueOf(input);
-
         history.add("Result: " + sResult + System.lineSeparator());
         return sResult;
     }
