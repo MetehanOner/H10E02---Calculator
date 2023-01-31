@@ -110,7 +110,7 @@ public class Calculator extends Application {
         gridPane.setVgap(5);
         gridPane.setAlignment(Pos.CENTER);
 
-        // Main initialization.
+        // Main initialization of alle.
         var labelContainer = new HBox(label);
         labelContainer.setAlignment(Pos.CENTER);
         labelContainer.setStyle("-fx-background-color: rgb(22,28,32);");
