@@ -4,6 +4,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,19 +29,28 @@ public class Logic {
         long fnum = Long.parseLong(fnum0);
         long snum = Long.parseLong(snum0);
 
-        long result = 0;
+        long result = Long.parseLong(input);
 
-        try {
-            result = switch (m.group(2)) {
-                case "+" -> sum(fnum, snum);
-                case "-" -> sub(fnum, snum);
-                case "x" -> mul(fnum, snum);
-                case "÷" -> div(fnum, snum);
-                case "%" -> modulo(fnum, snum);
-            };
-        } catch (ArithmeticException e) {
-            //you caught exception so what?
-            System.out.println(e.getMessage());
+        if (Objects.equals(m.group(2), "+")) {
+            result = sum(fnum, snum);
+        } else if (Objects.equals(m.group(2), "-")) {
+            result = sub(fnum, snum);
+        } else if (Objects.equals(m.group(2), "x")) {
+            result = mul(fnum, snum);
+        } else if (Objects.equals(m.group(2), "÷")) {
+            try {
+                result = div(fnum, snum);
+            } catch (ArithmeticException e) {
+                //you caught exception so what?
+                System.out.println(e.getMessage());
+            }
+        } else if (Objects.equals(m.group(2), "%")) {
+            try {
+                result = modulo(fnum, snum);
+            } catch (ArithmeticException e) {
+                //you caught exception so what?
+                System.out.println(e.getMessage());
+            }
         }
 
         String sResult = String.valueOf(result);
