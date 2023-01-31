@@ -31,6 +31,18 @@ public class Logic {
 
         long result = Long.parseLong(input);
 
+        try {
+            Objects.equals(m.group(2), "+");
+            result = div(fnum, snum);
+        } catch (IllegalStateException e) {
+            //you caught exception so what?
+            String s1 = (e.getMessage());
+            String s2 = (m.group(2));
+            String s3 = ("yavaş feridun abi yine mi?");
+            String Combined = s1 + s2 + s3;
+            throw new IllegalStateException(Combined);
+        }
+
         if (Objects.equals(m.group(2), "+")) {
             result = sum(fnum, snum);
         } else if (Objects.equals(m.group(2), "-")) {
