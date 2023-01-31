@@ -39,6 +39,7 @@ public class Logic {
                 case "%" -> modulo(fnum, snum);
             };
         } catch (ArithmeticException e) {
+            //you caught exception so what?
             System.out.println(e.getMessage());
         }
 
