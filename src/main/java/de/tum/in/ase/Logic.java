@@ -28,7 +28,8 @@ public class Logic {
         long fnum = Long.parseLong(fnum0);
         long snum = Long.parseLong(snum0);
 
-        long result;
+        long result = 0;
+
         try {
             result = switch (m.group(2)) {
                 case "+" -> sum(fnum, snum);
@@ -38,7 +39,7 @@ public class Logic {
                 case "%" -> modulo(fnum, snum);
             };
         } catch (ArithmeticException e) {
-            throw new ArithmeticException();
+            System.out.println(e.getMessage());
         }
 
         String sResult = String.valueOf(result);
