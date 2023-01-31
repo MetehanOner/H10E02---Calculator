@@ -19,9 +19,9 @@ public class Logic {
         }
         history.add("Input: " + input + System.lineSeparator());
 
-        Pattern pirasa = Pattern.compile("^-?(0|[1-9]\\d*)([\\+x÷%-])(0|[1-9]\\d*)$");
+        Pattern pirates = Pattern.compile("^-?(0|[1-9]\\d*)([\\+x÷%-])(0|[1-9]\\d*)$");
 
-        Matcher m = INPUT_VALIDATION_PATTERN.matcher(input);
+        Matcher m = pirates.matcher(input);
         m.matches();
         m.groupCount();
 
