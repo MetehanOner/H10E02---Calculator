@@ -25,13 +25,13 @@ public class Logic {
         m.matches();
         m.groupCount();
 
-        String fnum_init = m.group(1);
-        String snum_init = m.group(3);
+        String finit = m.group(1);
+        String sinit = m.group(3);
 
         String controlString = m.group(2);
 
-        long fn = Long.parseLong(fnum_init);
-        long sn = Long.parseLong(snum_init);
+        long fn = Long.parseLong(finit);
+        long sn = Long.parseLong(sinit);
 
         long result = fn;
         if (Objects.equals(controlString, "+")) {
