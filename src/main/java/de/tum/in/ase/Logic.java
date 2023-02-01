@@ -46,7 +46,7 @@ public class Logic {
             } catch (ArithmeticException e) {
                 System.out.println(e.getMessage());
             }
-        } else if (Objects.equals(m.group(2), "%")) {
+        } else if (Objects.equals(controlString, "%")) {
             try {
                 result = modulo(fn, sn);
             } catch (ArithmeticException e) {

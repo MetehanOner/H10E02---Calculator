@@ -176,7 +176,8 @@ public class Calculator extends Application {
         // evaluation button.
         operationButtons.get(5).setOnAction(action -> {
             // TODO Task 2.1 : Complete the action event for evaluation button using the `logic` attribute.
-            //  Pass the text of the label to the `evaluate(String)` method in `Logic` and then replace the label text with the return value of the `evaluate(String)` method.
+            //  Pass the text of the label to the `evaluate(String)` method in `Logic` and then replace
+            //  the label text with the return value of the `evaluate(String)` method.
             //  Additionally reset the currentOperation to `""`.
 
             if (checkMaximumLength()) {
@@ -205,6 +206,7 @@ public class Calculator extends Application {
                 outOfBoundAlert();
             }
             List<String> sList = logic.getHistory();
+            //sList.stream().parallel().filter(fString -> fString.equals("Input"))
             textArea.setText(sList.toString());
             // TODO: Optional part, Apply custom css to the text area, see line 136 for example.
             // Text area configuration
@@ -271,38 +273,42 @@ public class Calculator extends Application {
                 outOfBoundAlert();
             }
 
-            String currentEval = label.getText();
+            String afterText = label.getText()+symbol;
 
             Pattern pirates = Pattern.compile("^-?(0|[1-9]\\d*)([\\+x÷%-])(0|[1-9]\\d*)$");
 
-            Matcher m = pirates.matcher(currentEval);
+            Matcher m = pirates.matcher(afterText);
             boolean matchRes = m.matches();
 
             Pattern sailors = Pattern.compile("^-?\\d+$\n");
 
-            Matcher sMatcher = sailors.matcher(currentEval);
+            Matcher sMatcher = sailors.matcher(afterText);
             boolean sMatch = sMatcher.matches();
 
             if (matchRes) {
 
-                String nowRes = logic.evaluate(currentEval);
-                label.setText(nowRes);
+                String nowRes = logic.evaluate(afterText);
+                label.setText(nowRes + symbol);
 
-            } else if (sMatch || currentEval.equals("") && Objects.equals(symbol, "-")) {
+            } else if (sMatch || afterText.equals("") && Objects.equals(symbol, "-")) {
 
                 List<String> checkList = logic.getHistory().stream().filter(smith -> Objects.equals(smith, "")).toList();
 
                 if (checkList.size() == 0) {
-                    label.setText(symbol + currentEval);
+                    label.setText(symbol + afterText);
                     setCurrentOperation(symbol);
                 }
 
-            }
+            } else {
 
-            else {
+                String currentLabel = label.getText();
+                setCurrentOperation(symbol);
+                currentLabel = currentLabel + symbol;
+                label.setText(currentLabel);
+                System.out.println(currentLabel);
 
-                label.setText("INVALID INPUT");
-                setCurrentOperation("");
+                //label.setText("INVALID INPUT");
+                //setCurrentOperation("");
             }
 
             // 2. If 1 is not the case,
