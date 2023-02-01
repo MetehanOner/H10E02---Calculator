@@ -273,7 +273,7 @@ public class Calculator extends Application {
                 outOfBoundAlert();
             }
 
-            String afterText = label.getText()+symbol;
+            String afterText = label.getText() + symbol;
 
             Pattern pirates = Pattern.compile("^-?(0|[1-9]\\d*)([\\+x÷%-])(0|[1-9]\\d*)$");
 
