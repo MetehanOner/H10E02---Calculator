@@ -300,9 +300,9 @@ public class Calculator extends Application {
             }
 
             else {
-                throw new IllegalStateException(label.getText().trim());
-                //label.setText("INVALID INPUT");
-                //setCurrentOperation("");
+
+                label.setText("INVALID INPUT");
+                setCurrentOperation("");
             }
 
             // 2. If 1 is not the case,
