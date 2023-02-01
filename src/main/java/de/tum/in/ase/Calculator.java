@@ -17,6 +17,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Calculator extends Application {
     private List<Button> numberButtons;
@@ -259,10 +263,57 @@ public class Calculator extends Application {
     private EventHandler<ActionEvent> getEventOperation(String symbol) {
         return action -> {
             // TODO Task 2.3: Implement the operation button even handler functionality:
-            // 1. Check at first whether the text on the label is already a complete expression (two numbers and an operator in between) (e.g. via RegEx). If that is the case, use evaluate(String) to evaluate the expression and place the evaluation result on the label together with the new operator (on the right side of the evaluation result).
-            // 2. If 1 is not the case, check whether the text on the label is already a valid number (positive or negative number) (e.g. via RegEx) or whether the the text on the label is "" and symbol parameter is -.
-            // 3. If 2 is the case, add a - to the text on the label and (only if the text on the label was not "" before), adjust the currentOperation to - (e.g. via setCurrentOperation(String)).
-            // 4. If 2 is not the case the resulting expression will be invalid. Therefore, please set the text on the label to INVALID INPUT and reset the currentOperation to "" (e.g. via setCurrentOperation(String)).
+            // 1. Check at first whether the text on the label is already a complete expression
+            // (two numbers and an operator in between) (e.g. via RegEx). If that is the case,
+            // use evaluate(String) to evaluate the expression and place the evaluation result on the
+            // label together with the new operator (on the right side of the evaluation result).
+            if (checkMaximumLength()) {
+                outOfBoundAlert();
+            }
+
+            String currentEval = label.getText();
+
+            Pattern pirates = Pattern.compile("^-?(0|[1-9]\\d*)([\\+x÷%-])(0|[1-9]\\d*)$");
+
+            Matcher m = pirates.matcher(currentEval);
+            boolean matchRes = m.matches();
+
+            Pattern sailors = Pattern.compile("^-?\\d+$\n");
+
+            Matcher sMatcher = sailors.matcher(currentEval);
+            boolean sMatch = sMatcher.matches();
+
+            if (matchRes) {
+
+                String nowRes = logic.evaluate(currentEval);
+                label.setText(nowRes);
+
+            } else if (sMatch || currentEval == "" && Objects.equals(symbol, "-")) {
+
+                List<String> checkList = logic.getHistory().stream().filter(smith -> Objects.equals(smith, "")).collect(Collectors.toList());
+
+                if (checkList.size() == 0) {
+                    label.setText(symbol + currentEval);
+                    setCurrentOperation(symbol);
+                }
+
+            } else {
+                label.setText("INVALID INPUT");
+                setCurrentOperation("");
+            }
+
+            // 2. If 1 is not the case,
+            // check whether the text on the label is already a valid number
+            // (positive or negative number) (e.g. via RegEx) or whether the the text on the label is
+            // "" and symbol parameter is -.
+
+            // 3. If 2 is the case, add a - to the text on the label and
+            // (only if the text on the label was not "" before),
+            // adjust the currentOperation to - (e.g. via setCurrentOperation(String)).
+
+            // 4. If 2 is not the case the resulting expression will be invalid.
+            // Therefore, please set the text on the label to INVALID INPUT and reset the currentOperation to
+            // "" (e.g. via setCurrentOperation(String)).
         };
     }
 
