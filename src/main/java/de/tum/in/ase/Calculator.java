@@ -195,8 +195,13 @@ public class Calculator extends Application {
         otherButtons.get(3).setOnAction(action -> label.setText(""));
         // history button
         otherButtons.get(2).setOnAction(action -> {
-            // TODO Task 2.2: Add the current `history` from the `Logic`class to the `textArea` attribute in order to display the history on the history window.
-            textArea.setText("");
+            // TODO Task 2.2: Add the current `history` from the `Logic`class
+            //  to the `textArea` attribute in order to display the history on the history window.
+            if (checkMaximumLength()) {
+                outOfBoundAlert();
+            }
+            List<String> sList = logic.getHistory();
+            textArea.setText(sList.toString());
             // TODO: Optional part, Apply custom css to the text area, see line 136 for example.
             // Text area configuration
             textArea.setWrapText(true);
