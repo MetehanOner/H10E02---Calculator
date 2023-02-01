@@ -182,7 +182,7 @@ public class Calculator extends Application {
             String eval = label.getText();
             String resText = logic.evaluate(eval);
             label.setText(resText);
-            currentOperation = "";
+            setCurrentOperation("");
 
         });
     }
