@@ -288,7 +288,7 @@ public class Calculator extends Application {
                 String nowRes = logic.evaluate(currentEval);
                 label.setText(nowRes);
 
-            } else if (sMatch || currentEval == "" && Objects.equals(symbol, "-")) {
+            } else if (sMatch || currentEval.equals("") && Objects.equals(symbol, "-")) {
 
                 List<String> checkList = logic.getHistory().stream().filter(smith -> Objects.equals(smith, "")).collect(Collectors.toList());
 
