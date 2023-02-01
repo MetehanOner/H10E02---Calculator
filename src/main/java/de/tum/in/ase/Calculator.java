@@ -174,8 +174,15 @@ public class Calculator extends Application {
             // TODO Task 2.1 : Complete the action event for evaluation button using the `logic` attribute.
             //  Pass the text of the label to the `evaluate(String)` method in `Logic` and then replace the label text with the return value of the `evaluate(String)` method.
             //  Additionally reset the currentOperation to `""`.
-            /*label
-            logic.evaluate();*/
+
+            if (checkMaximumLength()) {
+                outOfBoundAlert();
+            }
+
+            String eval = label.getText();
+            String resText = logic.evaluate(eval);
+            label.setText(resText);
+            currentOperation = "";
 
         });
     }
