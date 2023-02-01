@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
+
 
 public class Calculator extends Application {
     private List<Button> numberButtons;
@@ -300,7 +300,7 @@ public class Calculator extends Application {
             }
 
             else {
-                throw new IllegalStateException(label.getText());
+                throw new IllegalStateException(label.getText().trim());
                 //label.setText("INVALID INPUT");
                 //setCurrentOperation("");
             }
