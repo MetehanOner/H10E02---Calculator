@@ -290,16 +290,19 @@ public class Calculator extends Application {
 
             } else if (sMatch || currentEval.equals("") && Objects.equals(symbol, "-")) {
 
-                //List<String> checkList = logic.getHistory().stream().filter(smith -> Objects.equals(smith, "")).toList();
+                List<String> checkList = logic.getHistory().stream().filter(smith -> Objects.equals(smith, "")).toList();
 
-                //if (checkList.size() == 0) {
+                if (checkList.size() == 0) {
                     label.setText(symbol + currentEval);
                     setCurrentOperation(symbol);
-                //}
+                }
 
-            } else {
-                label.setText("INVALID INPUT");
-                setCurrentOperation("");
+            }
+
+            else {
+                throw new IllegalStateException(label.getText());
+                //label.setText("INVALID INPUT");
+                //setCurrentOperation("");
             }
 
             // 2. If 1 is not the case,
